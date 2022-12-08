@@ -1,0 +1,20 @@
+
+#!/bin/bash
+
+DESTDIR="vsl142:.backup"
+FILELIST="$HOME/.backuplist"
+
+rsync -e 'ssh -x' -Har -v --delete --files-from="$FILELIST" "$HOME" "$DESTDIR"
+
+if [ "$?" = "0" ]
+then
+	echo
+	tput setaf 2
+	echo "Backup finished"
+else
+	echo
+	tput setaf 1
+	echo "Backup failed"
+fi
+tput sgr0
+echo
