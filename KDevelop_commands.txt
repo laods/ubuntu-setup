@@ -1,0 +1,63 @@
+#####################################################
+#             USEFUL KDEVELOP SHORTCUTS             #
+#####################################################
+#           Lars Vingli Odsæter, 01-07-13           #
+#####################################################
+# Based on http://userbase.kde.org/KDevelop4/Manual #
+#####################################################
+
+--------------------------------
+### NAVIGATION ###
+--------------------------------
+Alt + Ctrl + {PgUp, PgDown}	Next/previous funtion declaration
+Alt + Ctrl			Find and open: 
+	   + C 			  class
+	   + M			  function
+	   + O			  file
+	   + N			  outline
+	   + Q			  any match
+Ctrl + ,     			Jump to definition
+Ctrl + .			Jump to declaration
+Ctrl + G			Goto line
+Meta + {Left, Right}		Previous/next visited context
+Meta + Shift + {Left, Right}	Previous/next variable use
+Ctrl + Tab     	      		Change context
+Ctrl + 6       	      		Move to matching brachet
+
+--------------------------------
+### FIND ###
+--------------------------------
+Ctrl + F			Find
+  F3   				Find next
+  Shift + F3			Find previous
+Ctrl + R			Find and replace
+Ctrl + Alt + F			Find/replace in multiple files
+
+--------------------------------
+### EDITOR ###
+--------------------------------
+Alt + Shift + D			Add Doxygen documentation
+Ctrl + Alt + R			Rename variable
+Ctrl + D     			Comment out marked text
+Ctrl + Shift + D		Comment in marked text
+Ctrl + K       			Delete rest of line
+Ctrl + Z			Undo
+Ctrl + Shift + Z		Redo
+Ctrl + Shift + {Down, Up}	Move line up/down
+
+--------------------------------
+### DEBUGGING ###
+--------------------------------
+F5				Build [config]
+F6				Run executable [config]
+F7				Run debug [config]
+F8				Interrupt [config]
+F9				Continue [config]
+F10				Execute current line
+F11				Step into
+F12				Step out
+Ctrl + B			Set breakpoint [config]
+
+
+Meta=Windows-button
+

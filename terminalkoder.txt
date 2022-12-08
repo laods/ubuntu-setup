@@ -1,0 +1,44 @@
+Terminalkoder
+
+man <kommando>					Manual
+man -k <søkestreng>				Søk etter kommando
+diff <fil1> <fil2>				Sammenlign filer
+./<fil>						Kjør programfil
+sudo apt-get install <pakke>			Innstaller pakke Ubuntu
+sudo yum install <pakke>			Innstaller pakke RedHat
+sudo yum searcg <pakke>
+sudo yum list <search_string>			Finn innstallert pakke
+ssh <host>					ssh tilkobling
+sftp <host>					hente/laste opp filer
+	get					Hent fil (til current dir)
+	mget					Hent flere filer
+	get -r *				Hent alt
+	put					Last opp
+dpkg –get-selections | grep <søkestreng>	Søk etter innstallert pakke
+sudo bash					Få root tilgang
+top						Se alle prosesser og CPU bruk
+less /proc/cpuinfo				Info om prosessorer
+cat /proc/cpuinfo | grep processor | wc -l	Antall prosessorer
+
+echo '<math_expr>' | bc	 	     		Kalkulator!
+
+cat <filname>					Disp fil
+cat > <filename>				Opprett ny fil og skriv (Ctrl+d avslutter)
+cat >> <filname>				Fortsett å skrive (legg til tekst)
+head/tail <filename>				Se start/slutt av fil
+
+Søk
+find | grep <søk>				Finner filer med navn som inneholder søkestreng
+find ./ -type f | xargs grep -rl <string>	Finner filer som inneholder string
+grep -n -A 1 -B 1 '<string>' <file>		Finner linjer i <file> som inneholder <string>		
+
+ldd <binary> 	  	     			displays all dependent shared objects
+<binary> 2>&1 | tee <log-file>			redirect output from command (binary) to screen and log-file
+
+grep alias ~/.bashrc			 	Viser alias's
+
+qsub -l nodes=1:ppn=1:compute -I		Kjør prosess interaktivt på node (f.eks. på eddie)
+						Husk fulle stier!
+<command> | qsub -l nodes=1:ppn=1:compute -N <process_name>  Kjør prosess på eddie
+qdel <number>				        Drep qsub prosess
+

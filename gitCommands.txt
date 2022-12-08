@@ -1,0 +1,141 @@
+########################################
+#         USEFUL GIT COMMANDS          #
+########################################
+#    Lars Vingli Odsæter, 01-07-13     #
+########################################
+#   Based on http://git-scm.com/doc    #
+########################################
+
+----------------------------------------
+### SET-UP ###
+----------------------------------------
+git config --global user.name "name"    Set user name. Same for email 
+git config --get user.name              Get user name (if set)
+git config --global core.editor         Set default editor for commiting
+git config --global alias.st status     Make git aliases (Put '!' in front of non-git command)
+
+----------------------------------------
+### PUSH/PULL ###
+----------------------------------------
+git clone <url>                         Clone repo
+git push <remote> <branch>              Push to network
+git push <remote> <loc_b>:<remote_b>    Push local branch loc_b to remote branch remote_b
+git fetch <remote>                      Update remote references (branches)
+git merge <branch>                      Merge branch into HEAD
+git merge <remote>/<branch>             Merge remote branch into local branch
+git merge --no-commit <branch>          Not record merge commit
+git merge --squash <branch>             Squash work into one non-merge commit                   
+git mergetool                           Graphical tool to resolve merge conflicts (not *that* good)
+git pull <remote>                       ~= fetch + merge
+
+----------------------------------------
+### STAGING ###
+----------------------------------------
+git status                              See status 
+git add <file>                          Add modified/new file to stage mode
+git add -i                              Interactive add menu
+git add -p                              Stage part of file
+git rm <file>                           Delete file (in repo and locally)
+git rm --cached <file>                  Remove file from stage area but not in working dir
+git mv <file>                           Move or rename file
+git diff                                See changes not yet staged
+git diff --staged                       See changes that are staged
+git diff --check                        Check for whitespace errors(!)
+
+----------------------------------------
+### COMMITING ###
+----------------------------------------
+git commit                              Commit staged files
+git commit -a                           Add and commit modified tracked files
+git commit -m 'message'                 Commit staged files with message
+git commit -v                           'diff' is seen in commit file (as comment)
+git commit --amend                      Add new changes to last commit (or edit commit message)
+git reset HEAD <file>                   Unstage file
+git reset --soft HEAD~1                 Remove last commit locally
+git checkout -- <file>                  Discard changes in working dir
+
+----------------------------------------
+### BRANCHING ###
+----------------------------------------
+git branch <new_branch>                 Create new branch pointing to current commit
+git checkout <branch>                   Switch branch
+git checkout -b <branch>                Create and switch branch
+git checkout -b <br> <rem>/<rem_b>      Create local branch br that points to remote branch rem_b
+git branch -d <branch>                  Delete branch
+git branch -a                           List all local and remote-tracking branches
+git branch -v                           View branches and last commit
+git branch --[no-]merged                View branches that are merged (or not) into current branch
+git push <remote> :<branch>             Delete remote branch 
+git stash                               Stash your changes
+git stash apply                         Apply last stash
+
+----------------------------------------
+### REBASE ### 
+----------------------------------------
+# OBS!! Don't rebase pushed commits!
+git rebase <branch>                     Replay all commits from branch into current 
+git rebase <b1> <b2>                    Rebase b1 onto b2
+git rebase -i HEAD~<n>                  Edit, delete, reorder or squash last n commits interactively
+                                        http://git-scm.com/book/en/Git-Tools-Rewriting-History
+----------------------------------------
+### LOG ###
+----------------------------------------
+git log                                 Display log
+git log -p                              See commit diff's
+git log -<n>                            Display last n commits
+git log --stat                          See statistics
+git log --pretty=<format>               Choose display format.
+                                        Options: oneline, short, full, fuller, format
+git log --oneline
+git log --graph                         Show branch and merge graph
+git log --name-status                   Show files with modification info
+git log --after=<time>                  Time is relative (e.g. 2.days) or absolute (e.g. 2013-01-15)
+git log --before=<time>
+git log --author=<name>
+git log --grep=<string>
+git log --no-merges
+git log <b2> --not <b1>                 Display commits in b2 that are not in b1
+git log <remote>/<branch>..HEAD         Display commit that you are about to commit
+git show <commit>                       Show details of a commit (can also be branch name)
+git show HEAD^{n}                       n'th parent of HEAD
+git show HEAD~{n}                       Parent of parent of ... (n times)
+git reflog                              Log of HEAD branch
+
+----------------------------------------
+### REMOTE ###
+----------------------------------------
+git remote add <remote_name> <url>      Add remote
+git remote -v                           Display remotes
+git remote set-url <url>                Change remote url
+git remote rename <old_name> <new_name> Rename
+git remote rm <remote>                  Delete remote
+git remote show <remote>                Inspect remote
+
+----------------------------------------
+### TAGS ###
+----------------------------------------
+git tag                                 Show tags
+git tag <tag_name>                      Add lightweight tag
+git tag -a <tag_name> -m <message>      Add annotated tag (more information)
+git tag -a <tag_name> <commit>          Tag an old commit
+git show <tag>                          Inspect tag
+git push <remote> <tag>                 Share tags (not done with regular 'git push')
+
+----------------------------------------
+### DEBUGGING ###
+----------------------------------------
+git blame -C -L <l1>,<l2> <file>        Show last editors of lines l1 to l2 of file
+git bisect                              Tool to find broken commit
+                                        http://git-scm.com/book/en/Git-Tools-Debugging-with-Git
+
+----------------------------------------
+### PULL REQUEST OPM ###
+----------------------------------------
+* Fork repo on github.com (only needed once) 
+* Clone forked repo                    git clone git@github.com:laods/opm-porsol.git
+* Create upstream remote               git remote add upstream git@github.com:OPM/opm-porsol.git
+* Make sure repo up to date            git pull upstream (or fetch + merge)
+* Edit files and commit                git commit -a 
+* Push to fork                         git push origin master
+* Create pull request on github.com
+
