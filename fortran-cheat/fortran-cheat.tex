@@ -1,0 +1,375 @@
+\documentclass[10pt,a4paper]{article}
+
+% Packages
+\usepackage{fancyhdr}           % For header and footer
+\usepackage{multicol}           % Allows multicols in tables
+\usepackage{tabularx}           % Intelligent column widths
+\usepackage{tabulary}           % Used in header and footer
+\usepackage{hhline}             % Border under tables
+\usepackage{graphicx}           % For images
+\usepackage{xcolor}             % For hex colours
+%\usepackage[utf8x]{inputenc}    % For unicode character support
+\usepackage[T1]{fontenc}        % Without this we get weird character replacements
+\usepackage{colortbl}           % For coloured tables
+\usepackage{setspace}           % For line height
+\usepackage{lastpage}           % Needed for total page number
+\usepackage{seqsplit}           % Splits long words.
+%\usepackage{opensans}          % Can't make this work so far. Shame. Would be lovely.
+\usepackage[normalem]{ulem}     % For underlining links
+% Most of the following are not required for the majority
+% of cheat sheets but are needed for some symbol support.
+\usepackage{amsmath}            % Symbols
+\usepackage{MnSymbol}           % Symbols
+\usepackage{wasysym}            % Symbols
+%\usepackage[english,german,french,spanish,italian]{babel}              % Languages
+
+% Document Info
+\author{karlp}
+\pdfinfo{
+  /Title (fortran-90.pdf)
+  /Creator (Cheatography)
+  /Author (karlp)
+  /Subject (Fortran 90 Cheat Sheet)
+}
+
+% Lengths and widths
+\addtolength{\textwidth}{6cm}
+\addtolength{\textheight}{6cm}
+\addtolength{\hoffset}{-3cm}
+\addtolength{\voffset}{-2cm}
+\setlength{\tabcolsep}{0.2cm} % Space between columns
+\setlength{\headsep}{-12pt} % Reduce space between header and content
+%\setlength{\headheight}{85pt} % If less, LaTeX automatically increases it
+\renewcommand{\footrulewidth}{0pt} % Remove footer line
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+\renewcommand{\seqinsert}{\ifmmode\allowbreak\else\-\fi} % Hyphens in seqsplit
+% This two commands together give roughly
+% the right line height in the tables
+\renewcommand{\arraystretch}{1.3}
+\onehalfspacing
+
+% Commands
+\newcommand{\SetRowColor}[1]{\noalign{\gdef\RowColorName{#1}}\rowcolor{\RowColorName}} % Shortcut for row colour
+\newcommand{\mymulticolumn}[3]{\multicolumn{#1}{>{\columncolor{\RowColorName}}#2}{#3}} % For coloured multi-cols
+\newcolumntype{x}[1]{>{\raggedright}p{#1}} % New column types for ragged-right paragraph columns
+\newcommand{\tn}{\tabularnewline} % Required as custom column type in use
+
+% Font and Colours
+\definecolor{HeadBackground}{HTML}{333333}
+\definecolor{FootBackground}{HTML}{666666}
+\definecolor{TextColor}{HTML}{333333}
+\definecolor{DarkBackground}{HTML}{518F6C}
+\definecolor{LightBackground}{HTML}{F4F8F5}
+\renewcommand{\familydefault}{\sfdefault}
+\color{TextColor}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhead{} % Set header to blank
+\fancyfoot{} % Set footer to blank
+
+
+
+\begin{document}
+\raggedright
+\raggedcolumns
+
+% Set font size to small. Switch to any value
+% from this page to resize cheat sheet text:
+% www.emerson.emory.edu/services/latex/latex_169.html
+\footnotesize % Small font.
+
+\begin{multicols*}{3}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Boiler plate program}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{program name \newline     implicit none \newline     ! module imports go here \newline     ! local variables go here  \newline     ! code goes here, there is not main entry point. \newline end program} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Module}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{module name \newline     implicit none \newline     use other\_mod ! import another module \newline     ! local variables go here  \newline real, private :: a ! Private variable \newline     contains \newline     ! functions and subroutines goes here \newline end module} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Function}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{! return type goes before the function \newline integer function f(arg1, arg2, ...) \newline ! declarations, including input args \newline     f = 42  ! the function name is result var \newline end function} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Subroutine}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{! subroutines does not return a value \newline ! but they have out parameters \newline subroutine sub(a, b, c) \newline     integer, intent(in) :: a \newline     integer, intent(inout) :: b \newline     integer, intent(out) :: c \newline  c = a + b \newline end subroutine} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.28942 cm} x{2.68758 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Data types}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+`logical` & boolean \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+`integer(kind=1)` & 8 bits signed integer \tn 
+% Row Count 2 (+ 1)
+% Row 2
+\SetRowColor{LightBackground}
+`integer(kind=4)` & 32 bits signed integer \tn 
+% Row Count 4 (+ 2)
+% Row 3
+\SetRowColor{white}
+`integer(kind=8)` & 64 bits signed integer \tn 
+% Row Count 6 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+`real(kind=4)` & simple precision float \tn 
+% Row Count 8 (+ 2)
+% Row 5
+\SetRowColor{white}
+`real(kind=8)` & double precision float \tn 
+% Row Count 10 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+`complex(kind=4)` & simple precision complex number \tn 
+% Row Count 12 (+ 2)
+% Row 7
+\SetRowColor{white}
+`complex(kind=8)` & double precision complex number \tn 
+% Row Count 14 (+ 2)
+% Row 8
+\SetRowColor{LightBackground}
+\seqsplit{`character(len=n)} & string of size n \tn 
+% Row Count 15 (+ 1)
+% Row 9
+\SetRowColor{white}
+`integer, dimension(m, n)` & 2D array of shape (m, n) \tn 
+% Row Count 17 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Loops}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{do while (logical expr) \newline    ! Control: \newline    ! exit for break \newline    ! cycle for continue \newline end do \newline  \newline label: do i = start, stop ! , step ! (optional) \newline     ! statements \newline end do \newline \newline where (array logical) \newline ! array operations \newline elsewhere \newline ! rest of array operations \newline end where } \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Conditions}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{if (cond) then \newline     ! ... \newline else if (cond) then \newline     ! ... \newline else \newline     ! ... \newline end if} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Derived types (structures)}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{type new\_type \newline   integer :: i \newline  ! more fields \newline end type \newline  \newline type(new\_type) :: obj \newline obj\%i = 1 } \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+
+\par\addvspace{1.3em}
+\begin{tabularx}{5.377cm}{x{2.94011 cm} x{2.03689 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Arrays}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+real, dimension(n,m) :: arr & Declare array \tn 
+\SetRowColor{white}
+arr(i), arr(i:j:stride) & Access \tn 
+\SetRowColor{LightBackground}
+arr = (/ a,b,c /) & \tn 
+\SetRowColor{white}
+rank(a), size(a), size(a,dim), shape(a) & Array size \tn 
+\SetRowColor{LightBackground}
+dot\_product(vec1,vec2) & Vector product \tn
+\SetRowColor{white}
+matmul(mat1,mat2) & Matrix mult\tn 
+\SetRowColor{LightBackground}
+reshape(...), cshift(...), eoshift(...), transpose(...) & Array manipulations \tn
+\SetRowColor{white}
+real, dimension (:,:), allocatable :: darr & Dynamic array \tn 
+\SetRowColor{LightBackground}
+allocate(darr) \newline deallocate(darr) & Allocate and deallocate \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Building}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{
+\# Compile to object (.o) and modules files (.mod) \newline
+gfortran -c testModule.f90 mainProg.f90 \newline
+\# Then link into executable \newline
+gfortran -o run testModule.o mainProg.o
+} \tn 
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.4885 cm} x{2.4885 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Native functions}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+abs(v) & absolute value of v \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+aimag(z) & imaginary part of z (single prec) \tn 
+% Row Count 3 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+int(v, kind) & truncates toward zero to convert to integer \tn 
+% Row Count 6 (+ 3)
+% Row 3
+\SetRowColor{white}
+ceiling(v, kind) & ceiling and convert \tn 
+% Row Count 7 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+floor(v, kind) & floor and convert \tn 
+% Row Count 8 (+ 1)
+% Row 5
+\SetRowColor{white}
+modulo(a, p) & polymorphic modulo (sign of p) \tn 
+% Row Count 10 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+cmplx(x, y, kind) & make a complex from floats \tn 
+% Row Count 12 (+ 2)
+% Row 7
+\SetRowColor{white}
+conjg(z) & conjugate complex \tn 
+% Row Count 13 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+cos(x), dcos(x), ccos(x) & cosine \tn 
+% Row Count 15 (+ 2)
+% Row 9
+\SetRowColor{white}
+sin(x), dsin(x), csin(x) & sine \tn 
+% Row Count 17 (+ 2)
+% Row 10
+\SetRowColor{LightBackground}
+acos(x), dacos(x) & inverse cosine \tn 
+% Row Count 18 (+ 1)
+% Row 11
+\SetRowColor{white}
+asin(x), dasin(x) & inverse sine \tn 
+% Row Count 19 (+ 1)
+% Row 12
+\SetRowColor{LightBackground}
+dprod(x, y) & x * y as a double \tn 
+% Row Count 20 (+ 1)
+% Row 13
+\SetRowColor{white}
+exp(x), dexp(x), cexp(x) & exponential \tn 
+% Row Count 22 (+ 2)
+% Row 14
+\SetRowColor{LightBackground}
+erf(x), derf(x) & error function \tn 
+% Row Count 23 (+ 1)
+% Row 15
+\SetRowColor{white}
+erfc(x), derfc(x) & complementary error function \tn 
+% Row Count 25 (+ 2)
+% Row 16
+\SetRowColor{LightBackground}
+hypot(a, b) & hypothenuse of x and y (single prec) \tn 
+% Row Count 27 (+ 2)
+% Row 17
+\SetRowColor{white}
+log(x), log10(x) & natural and base 10 logarithm \tn 
+% Row Count 29 (+ 2)
+% Row 18
+\SetRowColor{LightBackground}
+max(a, b, ...), min(a, b, ...) & polymorphic extrema \tn 
+% Row Count 31 (+ 2)
+% Row 19
+\SetRowColor{white}
+sum(arr), product(arr), minval(arr), maxval(arr), all(arr), any(arr) & polymorphic reduction of array, all can be used with dim as second variable \tn 
+% Row Count 4 (+ 4)
+% Row 20
+\SetRowColor{LightBackground}
+minloc(arr, dim), maxloc(arr, dim) & the indices of extrema in along axis dim \tn 
+% Row Count 14 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.14011 cm} x{2.83689 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Operators}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+** & exponentiation \tn 
+% Row Count 4 (+ 1)
+% Row 3
+\SetRowColor{white}
+== & equality (numbers) \tn 
+% Row Count 5 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+/= & inequality (numbers) \tn 
+% Row Count 6 (+ 1)
+% Row 5
+\SetRowColor{white}
+.eqv. & equality (booleans) \tn 
+% Row Count 9 (+ 1)
+% Row 8
+\SetRowColor{LightBackground}
+.neqv. & inequality (booleans) \tn 
+% Row Count 10 (+ 1)
+% Row 9
+\SetRowColor{white}
+.and., .or., .not. & logicals \tn 
+% Row Count 12 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Input/Output}}  \tn
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{
+print *, str1, str2, ... \newline
+read *, var1, var2, ... \newline
+write(unit\_nr, *) output \newline
+open (unit\_nr, file=filename)
+} \tn
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+
+
+% That's all folks
+\end{multicols*}
+
+\end{document}
